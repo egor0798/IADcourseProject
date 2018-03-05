@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="perks_for_states")
-public class PerksForStates {
+public class PerkForState {
     @Id
     @Column(name = "id")
     private long id;
@@ -23,12 +23,11 @@ public class PerksForStates {
     @Column(name = "bonus")
     private String bonus;
 
-    @OneToMany
-    @JoinColumn(name="perk", referencedColumnName = "id")
-    private List<Nations> nationsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perk")
+    private List<Nation> nationList;
 
 
-    public PerksForStates(int id, String parameter, String bonus){
+    public PerkForState(int id, String parameter, String bonus){
         this.id=id;
         this.parameter=parameter;
         this.bonus=bonus;

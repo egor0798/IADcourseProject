@@ -6,20 +6,25 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name="players")
-public class Players {
-    @OneToMany
-    @JoinColumn(name="player_id", referencedColumnName = "id")
-    private List<Achievements> achievementsList = new ArrayList<>();
+public class Player {
 
+    //unidirectional one-to-many
     @OneToMany
-    @JoinColumn(name="creator_id", referencedColumnName = "id")
-    private List<Achievements> modsList = new ArrayList<>();
+    @JoinColumn(name="players_id", referencedColumnName = "id")
+    private Set<Achievement> achievementList = new HashSet<>();
+
+    //not unidirectional one-to-many
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "creator")
+    private List<Mod> modList = new ArrayList<>();
 
     @Id
     @Column(name = "id")
@@ -35,12 +40,12 @@ public class Players {
     @Column(name="password")
     private String password;
     @Column (name="role")
-    // TODO realize roles
+    // TODO do roles
     //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //private List<Role> role;
     private String role;
 
-    public Players(int id, String nickname, String firstName, String lastName, String role, String password){
+    public Player(int id, String nickname, String firstName, String lastName, String role, String password){
         this.id=id;
         this.firstName=firstName;
         this.lastName=lastName;

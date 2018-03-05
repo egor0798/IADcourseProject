@@ -1,7 +1,7 @@
 package civ5.civa.repo;
 
-import civ5.civa.model.Wonders;
+import civ5.civa.model.Wonder;
 import org.springframework.data.repository.CrudRepository;
 
-public interface WondersRepository extends CrudRepository<Wonders, Long> {
+public interface WondersRepository extends CrudRepository<Wonder, Long> {
 }

@@ -1,6 +1,7 @@
 package civ5.civa.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -9,13 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name="achievements")
-public class Achievements{
+public class Achievement {
 
     Calendar calendar = Calendar.getInstance();
 
@@ -26,28 +27,27 @@ public class Achievements{
     @Id
     @Column(name = "id")
     private long id;
-
+    //TODO rename to players_id to player_id in DB creating script bc this is illogically
     @Column(name = "players_id")
-    private long players_id;
+    private long playerId;
 
     @Column(name = "name")
     private String name;
 
+
+    // TODO refactor date format. Date class is deprecated
     @Column(name = "achieving_date")
-    private Date achieving_date;
+    private Date achievingDate;
 
     @Column(name = "conditions", length = 1_000)
     private String conditions;
 
-    protected Achievements() {
-    }
-
-    public Achievements(int id, int players_id, String name, String conditions){
+    public Achievement(int id, int players_id, String name, String conditions){
         this.id=id;
-        this.players_id=players_id;
+        this.playerId =players_id;
         this.name=name;
         this.conditions=conditions;
         Date date = new Date(Year,Month,Date);
-        this.achieving_date=date;
+        this.achievingDate =date;
     }
 }

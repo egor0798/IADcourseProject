@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "bonuses_from_resources")
-public class Bonuses_From_Resources {
+public class BonusFromResource {
     @Id
     @Column(name = "id")
     private long id;
@@ -21,14 +21,12 @@ public class Bonuses_From_Resources {
     @Column(name = "bonus")
     private String bonus;
 
-    @OneToMany
-    @JoinColumn(name="bonus_without_improvement", referencedColumnName = "id")
-    private List<Resources> resourcesList = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name="bonus_with_improvement", referencedColumnName = "id")
-    private List<Resources> resourcesList1 = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bonusWithoutImprovement")
+    private List<Resource> resourceList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bonusWithoutImprovement")
+    private List<Resource> resourceWithImpList1 = new ArrayList<>();
 
-    public Bonuses_From_Resources(long id, String parameter, String bonus){
+    public BonusFromResource(long id, String parameter, String bonus){
         this.id = id;
         this.parameter = parameter;
         this.bonus = bonus;

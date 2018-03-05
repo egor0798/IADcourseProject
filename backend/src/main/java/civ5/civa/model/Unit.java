@@ -3,9 +3,6 @@ package civ5.civa.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="units")
-public class Units {
+public class Unit {
 
     @Id
     @Column(name = "id")
@@ -34,12 +31,26 @@ public class Units {
     private int strength;
     @Column(name = "range_attack")
     private int range_attack;
-    @Column(name = "technology_to_create")
-    private int technology_to_create;
-    @Column(name = "resource")
-    private Integer resource;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "technology_to_create")
+    private Technology technologyToCreate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resource")
+    private Resource resource;
 
-    public Units(int id, String name, boolean unq_unit, String type, int pts_create, int pts_mov, int strength, int range_attack, int tech_create, Integer resource){
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "uniqueUnit")
+    private List<Nation> nationList = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "unit_perks",
+            joinColumns = @JoinColumn(name = "unit_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "perk_id", referencedColumnName = "id")
+    )
+    private List<PerkForUnit> perkForUnitList = new ArrayList<>();
+
+
+    public Unit(int id, String name, boolean unq_unit, String type, int pts_create, int pts_mov, int strength, int range_attack, Technology tech_create, Resource resource){
         this.id=id;
         this.name = name;
         this.points_of_mov = pts_mov;
@@ -49,18 +60,8 @@ public class Units {
         this.strength=strength;
         this.range_attack = range_attack;
         this.resource = resource;
-        this.technology_to_create = tech_create;
+        this.technologyToCreate = tech_create;
     }
 
-    @OneToMany
-    @JoinColumn(name="unique_unit", referencedColumnName = "id")
-    private List<Nations> nationsList = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "unit_perks",
-            joinColumns = @JoinColumn(name = "unit_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "perk_id", referencedColumnName = "id")
-    )
-    private List<PerksForUnits> perksForUnitsList = new ArrayList<>();
 }

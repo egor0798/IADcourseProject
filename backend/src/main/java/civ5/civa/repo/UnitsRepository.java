@@ -1,7 +1,7 @@
 package civ5.civa.repo;
 
-import civ5.civa.model.Units;
+import civ5.civa.model.Unit;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UnitsRepository extends CrudRepository<Units, Long> {
+public interface UnitsRepository extends CrudRepository<Unit, Long> {
 }

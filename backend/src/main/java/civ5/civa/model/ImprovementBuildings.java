@@ -12,17 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "improvement_buildings")
-public class Improvement_Buildings {
+public class ImprovementBuildings {
     @Id
     @Column(name = "id")
     private long id;
     @Column(name = "name")
     private String name;
-    @OneToMany
-    @JoinColumn(name="type_of_improvement", referencedColumnName = "id")
-    private List<Resources> resourcesList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "typeOfImprovement")
+    private List<Resource> resourceList = new ArrayList<>();
 
-    public Improvement_Buildings(long id, String name){
+    public ImprovementBuildings(long id, String name){
         this.id = id;
         this.name = name;
     }

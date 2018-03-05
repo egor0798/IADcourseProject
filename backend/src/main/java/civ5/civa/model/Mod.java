@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 @Getter
@@ -15,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name="mods")
-public class Mods {
+public class Mod {
     public static int getCurrentYear()
     {
         Calendar calendar = Calendar.getInstance(java.util.TimeZone.getDefault(), java.util.Locale.getDefault());
@@ -40,24 +37,27 @@ public class Mods {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "creator_id")
-    private int creator_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "creator_id")
+    private Player creator;
 
-    @Column(name = "nation_id")
-    private int nation_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nation_id")
+    private Nation nation;
 
     @Column(name = "creation")
     private Date creation;
 
     @Column(name = "last_modification")
-    private Date last_modification;
-    public Mods(int id, int creator_id, int nation_id){
+    private Date lastModification;
+
+    public Mod(int id, Player creator, Nation nation){
         this.id=id;
-        this.creator_id=creator_id;
-        this.nation_id=nation_id;
+        this.creator=creator;
+        this.nation=nation;
         java.sql.Date date = new java.sql.Date(getCurrentYear(), getCurrentMonth(), getCurrentDay());
         java.sql.Date date2 = new java.sql.Date(getCurrentYear()-1, getCurrentMonth()-2, getCurrentDay()-1);
         this.creation=date2;
-        this.last_modification=date;
+        this.lastModification =date;
     }
 }

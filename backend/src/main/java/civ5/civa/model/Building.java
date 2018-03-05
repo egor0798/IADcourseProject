@@ -3,9 +3,6 @@ package civ5.civa.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="buildings")
-public class Buildings {
+public class Building {
     @Id
     @Column(name = "id")
     private long id;
@@ -24,10 +21,10 @@ public class Buildings {
     private String name;
 
     @Column(name = "price_production")
-    private int price_production;
+    private int priceProduction;
 
     @Column(name = "price_resource")
-    private int price_resource;
+    private int priceResource;
 
     @Column(name = "requirements")
     private String requirements;
@@ -35,28 +32,29 @@ public class Buildings {
     @Column(name = "properties")
     private String properties;
 
-    @OneToMany
-    @JoinColumn(name="unique_building", referencedColumnName = "id")
-    private List<Nations> nationsList = new ArrayList<>();
+
+    //TODO two nations can have similar unique building?
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "uniqueBuilding")
+    private List<Nation> nationList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "buildings")
-    private List<Technologies> technologies = new ArrayList<>();
+    private List<Technology> technologies = new ArrayList<>();
 
 
 
-    public Buildings(int id, String name, int price_production, int price_resource, String requirements, String properties){
+    public Building(int id, String name, int priceProduction, int priceResource, String requirements, String properties){
         this.id=id;
         this.name=name;
-        this.price_production=price_production;
-        this.price_resource=price_resource;
+        this.priceProduction = priceProduction;
+        this.priceResource = priceResource;
         this.requirements=requirements;
         this.properties=properties;
     }
 
-    public Buildings(int id, String name, int price_production, String requirements, String properties){
+    public Building(int id, String name, int priceProduction, String requirements, String properties){
         this.id=id;
         this.name=name;
-        this.price_production=price_production;
+        this.priceProduction = priceProduction;
         this.requirements=requirements;
         this.properties=properties;
     }
