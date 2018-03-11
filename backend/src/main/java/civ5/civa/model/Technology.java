@@ -17,7 +17,7 @@ public class Technology {
     @Column(name="id")
     private long id;
     @Column(name = "tech_name")
-    private String tech_name;
+    private String name;
     @Column(name = "points")
     private int points;
     @Column(name = "features")
@@ -43,10 +43,10 @@ public class Technology {
     private List<Wonder> wonderList = new ArrayList<>();
 
 
-    public Technology(int id, String tech_name, int points, String features){
+    public Technology(int id, String name, int points, String features){
         this.id=id;
         this.features = features;
-        this.tech_name = tech_name;
+        this.name = name;
         this.points = points;
     }
 }

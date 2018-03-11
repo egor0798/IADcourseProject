@@ -9,37 +9,38 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class WebController {
     @Autowired
-    PlayersRepository playersRepository;
+    PlayerRepository playerRepository;
     @Autowired
-    AchievementsRepository achievementsRepository;
+    AchievementRepository achievementRepository;
     @Autowired
-    ModsRepository modsRepository;
+    ModRepository modRepository;
     @Autowired
-    NationsRepository nationsRepository;
+    NationRepository nationRepository;
     @Autowired
-    PerksForStatesRepository perksForStatesRepository;
+    PerkForStateRepository perkForStateRepository;
     @Autowired
-    UnitsRepository unitsRepository;
+    UnitRepository unitRepository;
     @Autowired
-    TechnologiesRepository technologiesRepository;
+    TechnologyRepository technologyRepository;
     @Autowired
-    BuildingsRepository buildingsRepository;
+    BuildingRepository buildingRepository;
     @Autowired
-    BonusesFromResourcesRepository bonusesFromResourcesRepository;
+    BonusFromResourceRepository bonusFromResourceRepository;
     @Autowired
-    ImprBuildRepository imprBuildRepository;
+    ImprovementBuildingRepository improvementBuildingRepository;
     @Autowired
-    ResourcesRepository resourcesRepository;
+    ResourceRepository resourceRepository;
     @Autowired
-    WondersRepository wondersRepository;
+    WonderRepository wonderRepository;
     @Autowired
-    PerksForUnitsRepository perksForUnitsRepository;
+    PerkForUnitRepository perkForUnitRepository;
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 
@@ -55,7 +56,7 @@ public class WebController {
 //        resourcesRepository.deleteAll();
 //        bonusesFromResourcesRepository.deleteAll();
 //        imprBuildRepository.deleteAll();
-//        technologiesRepository.deleteAll();
+//        technologyRepository.deleteAll();
 //        buildingsRepository.deleteAll();
 //        wondersRepository.deleteAll();
 //        perksForStatesRepository.deleteAll();
@@ -69,13 +70,13 @@ public class WebController {
 //        achievementsRepository.save(new Achievement(3, 2, "skjbskjbdxs", "ksjbcxsx"));
 //        wondersRepository.save(new Wonder(1,"sdsd", 212,12,"sdsd"));
 //        wondersRepository.save(new Wonder(2, "aaaa",322,13,"aaas"));
-//        technologiesRepository.save(new Technology(1,"mapping", 12, "sdsd"));
+//        technologyRepository.save(new Technology(1,"mapping", 12, "sdsd"));
 //        Wonder EifelTower = new Wonder(3,"Eifel Tower", 222,19,"Located in Paris, +19 culture");
 //        Technology Welding = new Technology(2,"Welding",110,"Opens Eifell Tower");
 //        Technology Radio = new Technology(3,"Radio",222, "Opens Radio Station");
 //        wondersRepository.save(EifelTower);
-//        technologiesRepository.save(Welding);
-//        technologiesRepository.save(Radio);
+//        technologyRepository.save(Welding);
+//        technologyRepository.save(Radio);
 //        List<Technology> techs = new ArrayList<>();
 //        techs.add(Welding);
 //        EifelTower.setTechList(techs);
@@ -83,7 +84,7 @@ public class WebController {
 //        wonders.add(EifelTower);
 //        Welding.setWonderList(wonders);
 //        wondersRepository.save(EifelTower);
-//        technologiesRepository.save(Welding);
+//        technologyRepository.save(Welding);
 //        perksForStatesRepository.save(new PerkForState(1,"startegic resources","+100%"));
 //        perksForStatesRepository.save(new PerkForState(2,"culture points","+50%"));
 //        perksForStatesRepository.save(new PerkForState(3,"jungles can be used as roads","1"));
@@ -97,7 +98,7 @@ public class WebController {
 //        buildings.add(RadioStation);
 //        Radio.setBuildings(buildings);
 //        buildingsRepository.save(RadioStation);
-//        technologiesRepository.save(Radio);
+//        technologyRepository.save(Radio);
 //        bonusesFromResourcesRepository.save(new BonusFromResource(1,"no", "no"));
 //        bonusesFromResourcesRepository.save(new BonusFromResource(2,"oil","+4"));
 //        imprBuildRepository.save(new ImprovementBuildings(1,"field"));
@@ -153,13 +154,14 @@ public class WebController {
         return list;
     }
 
-//    @RequestMapping("/findallwonders")
-//    public List<Wonder> findWonders(){
+    @RequestMapping("/findallwonders")
+    public List<Optional<Wonder>> findWonders(){
 //        Iterable<Wonder> iterable =  wondersRepository.findAll();
 //        List<Wonder> wonders = new ArrayList();
 //        iterable.forEach(wonders::add);
 //        return wonders;
-//    }
+        return Arrays.asList(wonderRepository.findById(1L));
+    }
 
     @RequestMapping("/current_unit_perks/{name}")
     @ResponseBody

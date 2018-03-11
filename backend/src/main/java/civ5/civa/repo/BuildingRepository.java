@@ -5,6 +5,6 @@ import civ5.civa.model.Building;
 import org.springframework.data.repository.CrudRepository;
 
 
-public interface BuildingsRepository extends CrudRepository<Building, Long> {
+public interface BuildingRepository extends CrudRepository<Building, Long> {
 
 }
