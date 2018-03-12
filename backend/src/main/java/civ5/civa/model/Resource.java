@@ -21,15 +21,12 @@ public class Resource {
     @Column(name = "typeOfResource")
     private String typeOfResource;
 
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bonus_without_improvement")
     private BonusFromResource bonusWithoutImprovement;
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bonus_with_improvement")
     private BonusFromResource bonusWithImprovement;
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_of_improvement")
     private ImprovementBuildings typeOfImprovement;
@@ -37,7 +34,6 @@ public class Resource {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
     private List<Unit> unitList = new ArrayList<>();
 
-    //TODO ask AJIEKCEN wtf it was one-to-one
 
 
 

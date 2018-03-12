@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import civ5.civa.repo.*;
 import civ5.civa.model.*;
+
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -43,6 +45,12 @@ public class WebController {
     PerkForUnitRepository perkForUnitRepository;
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
+
+
+    @PostConstruct
+    public void init(){
+        achievementRepository.save(new Achievement(1,1,"aaa","bbbb"));
+    }
 
    // @RequestMapping("/save")
 //    public String process(){

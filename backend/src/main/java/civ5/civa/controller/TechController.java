@@ -19,5 +19,4 @@ public class TechController {
         return technologyRepository.findByName(techName);
     }
 
-    //TODO how do we get future tech that current tech allows us to learn. We removed prev_tech from technology table
 }

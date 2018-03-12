@@ -4,12 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.sql.Date;
-import java.util.Calendar;
+import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -17,12 +14,6 @@ import java.util.Calendar;
 @NoArgsConstructor
 @Table(name="achievements")
 public class Achievement {
-
-    Calendar calendar = Calendar.getInstance();
-
-    int Date = calendar.get(Calendar.DAY_OF_MONTH);
-    int Month = calendar.get(Calendar.MONTH);
-    int Year = calendar.get(Calendar.YEAR)-1900;
 
     @Id
     @Column(name = "id")
@@ -35,8 +26,8 @@ public class Achievement {
     private String name;
 
 
-    // TODO refactor date format. Date class is deprecated
     @Column(name = "achieving_date")
+    @Temporal(TemporalType.DATE)
     private Date achievingDate;
 
     @Column(name = "conditions", length = 1_000)
@@ -47,7 +38,6 @@ public class Achievement {
         this.playerId =players_id;
         this.name=name;
         this.conditions=conditions;
-        Date date = new Date(Year,Month,Date);
-        this.achievingDate =date;
+        this.achievingDate = new Date(System.currentTimeMillis());
     }
 }

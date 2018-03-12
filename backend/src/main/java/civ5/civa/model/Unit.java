@@ -38,8 +38,8 @@ public class Unit {
     @JoinColumn(name = "resource")
     private Resource resource;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "uniqueUnit")
-    private List<Nation> nationList = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueUnit")
+    private Nation nation;
 
     @ManyToMany
     @JoinTable(

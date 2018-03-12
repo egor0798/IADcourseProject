@@ -33,9 +33,8 @@ public class Building {
     private String properties;
 
 
-    //TODO two nations can have similar unique building?
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "uniqueBuilding")
-    private List<Nation> nationList = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueBuilding")
+    private Nation nation;
 
     @ManyToMany(mappedBy = "buildings")
     private List<Technology> technologies = new ArrayList<>();

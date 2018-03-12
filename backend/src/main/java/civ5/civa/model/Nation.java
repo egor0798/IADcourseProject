@@ -23,11 +23,14 @@ public class Nation {
     @Column(name="ruler")
     private String ruler;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unique_building")
     private Building uniqueBuilding;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //TODO think about splitting unit an unique unit. with common table hard to do 2 unique units for nation
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unique_unit")
     private Unit uniqueUnit;
 
