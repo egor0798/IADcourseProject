@@ -14,8 +14,7 @@ import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-@RestController
+@RestController(value = "/auth")
 public class WebController {
     @Autowired
     PlayerRepository playerRepository;
@@ -153,36 +152,36 @@ public class WebController {
     //find all achievements of player
 
 
-    @RequestMapping("/findplayersachievements")
-    public List findPlayersAchievements(){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String queryString = "SELECT players.nickname, achievements.name, achievements.achieving_date, achievements.conditions FROM players JOIN achievements ON players.id = achievements.players_id ORDER BY achievements.players_id;";
-        Query query = entityManager.createNativeQuery(queryString);
-        List<Object> list = query.getResultList();
-        return list;
-    }
-
-    @RequestMapping("/findallwonders")
-    public List<Optional<Wonder>> findWonders(){
-//        Iterable<Wonder> iterable =  wondersRepository.findAll();
-//        List<Wonder> wonders = new ArrayList();
-//        iterable.forEach(wonders::add);
-//        return wonders;
-        return Arrays.asList(wonderRepository.findById(1L));
-    }
-
-    @RequestMapping("/current_unit_perks/{name}")
-    @ResponseBody
-    public List currentUnitPerks(@PathVariable("name") String name){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String queryString = "SELECT perks_for_units.parameter, perks_for_units.bonus FROM perks_for_units WHERE perks_for_units.id IN (SELECT unit_perks.perk_id FROM unit_perks JOIN units ON units.id = unit_perks.unit_id WHERE units.id = (SELECT units.id FROM units WHERE units.unit_name = ?1));";
-        Query query = entityManager.createNativeQuery(queryString).setParameter(1,name);
-        List<Object> list = query.getResultList();
-        return list;
-    }
-    @RequestMapping("/")
-    public String Hello(){
-        return new String("Hello World! Это 2 часть курсача");
-    }
+//    @RequestMapping("/findplayersachievements")
+//    public List findPlayersAchievements(){
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        String queryString = "SELECT players.nickname, achievements.name, achievements.achieving_date, achievements.conditions FROM players JOIN achievements ON players.id = achievements.players_id ORDER BY achievements.players_id;";
+//        Query query = entityManager.createNativeQuery(queryString);
+//        List<Object> list = query.getResultList();
+//        return list;
+//    }
+//
+//    @RequestMapping("/findallwonders")
+//    public List<Optional<Wonder>> findWonders(){
+////        Iterable<Wonder> iterable =  wondersRepository.findAll();
+////        List<Wonder> wonders = new ArrayList();
+////        iterable.forEach(wonders::add);
+////        return wonders;
+//        return Arrays.asList(wonderRepository.findById(1L));
+//    }
+//
+//    @RequestMapping("/current_unit_perks/{name}")
+//    @ResponseBody
+//    public List currentUnitPerks(@PathVariable("name") String name){
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        String queryString = "SELECT perks_for_units.parameter, perks_for_units.bonus FROM perks_for_units WHERE perks_for_units.id IN (SELECT unit_perks.perk_id FROM unit_perks JOIN units ON units.id = unit_perks.unit_id WHERE units.id = (SELECT units.id FROM units WHERE units.unit_name = ?1));";
+//        Query query = entityManager.createNativeQuery(queryString).setParameter(1,name);
+//        List<Object> list = query.getResultList();
+//        return list;
+//    }
+//    @RequestMapping("/")
+//    public String Hello(){
+//        return new String("Hello World! Это 2 часть курсача");
+//    }
 }
 

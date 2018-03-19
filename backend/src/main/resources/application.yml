@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/civ
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+facebook:
+    client:
+      clientId: 202537560336731 #231347784105855 not test app
+      clientSecret: 8025f3d5b56109af77f79a082573e655 #460c48baf9d991f7560ca52b2eab00fb
+      accessTokenUri: https://graph.facebook.com/oauth/access_token
+      userAuthorizationUri: https://www.facebook.com/dialog/oauth
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://graph.facebook.com/me
+
+
+
+server:
+  port: 8080
+#security:
+#  oauth2:
+#      client:
+#          clientId: 913516864174-ci3coeqc0eojo8c4l8ihge6unk91nuqb.apps.googleusercontent.com
+#          clientSecret: 6dXevS9yuRhft4rm6zI8XJDs
+#          accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+#          userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+#          tokenName: oauth_token
+#          authenticationScheme: query
+#          clientAuthenticationScheme: form
+#          scope: profile
+#      resource:
+#        userInfoUri: https://www.googleapis.com/userinfo/v3/userinfo
+#        preferTokenInfo: false
