@@ -1,35 +1,40 @@
 package civ5.civa.controller;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.Filter;
-
+import civ5.civa.model.User;
+import civ5.civa.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.filter.CompositeFilter;
 
+import javax.servlet.Filter;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 @SpringBootApplication
+//@EnableAutoConfiguration
 @EnableOAuth2Client
 @RestController
 public class AuthController extends WebSecurityConfigurerAdapter {
@@ -38,11 +43,15 @@ public class AuthController extends WebSecurityConfigurerAdapter {
 	@Autowired
 	OAuth2ClientContext oauth2ClientContext;
 
+//	@Autowired
+//	UserRepository userRepository;
+//	@RequestMapping("/user")
+//	public Principal user(Principal principal) {
+//		LinkedHashMap<String, String> details= (LinkedHashMap) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		//userRepository.save(new User(details.get("name"), details.get("id")));
+//		return principal;
+//	}
 
-	@RequestMapping("/user")
-	public Principal user(Principal principal) {
-		return principal;
-	}
 
 	// @formatter:off
 	@Override
@@ -69,12 +78,15 @@ public class AuthController extends WebSecurityConfigurerAdapter {
 		OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter(
 				"/connect/facebook");
 		OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
+//		System.out.println(facebookTemplate.getAccessToken());
 		facebookFilter.setRestTemplate(facebookTemplate);
 		UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebookResource().getUserInfoUri(),
 				facebook().getClientId());
+//		AuthorityUtils.commaSeparatedStringToAuthorityList("user_posts,public_profile");
+//		tokenServices.setAuthoritiesExtractor();
 		tokenServices.setRestTemplate(facebookTemplate);
 		facebookFilter.setTokenServices(tokenServices);
-		
+
 
 
 		filters.add(facebookFilter);
@@ -102,6 +114,7 @@ public class AuthController extends WebSecurityConfigurerAdapter {
 	public ResourceServerProperties facebookResource() {
 		return new ResourceServerProperties();
 	}
+
 
 
 }

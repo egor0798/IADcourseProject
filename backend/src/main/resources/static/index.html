@@ -16,16 +16,17 @@
 <body ng-app="app" ng-controller="home as home">
 <h1>Login</h1>
 <div class="container" ng-show="!home.authenticated">
+
     <div>
-        With Facebook: <a href="/connect/facebook">click here</a>
-    </div>
-    <div>
-        With VK: <a href="/connect/vk">click here</a>
+        <div>
+            With Facebook: <a href="/connect/facebook">click here</a>
+        </div>
     </div>
 
 </div>
 <div class="container" ng-show="home.authenticated">
     Logged in as: <span ng-bind="home.user"></span>
+    Facebook Id: <span ng-bind="home.id"></span>
 </div>
 <div>
     <button ng-click="home.logout()" class="btn btn-primary">Logout</button>
@@ -37,6 +38,7 @@
         var self = this;
         $http.get("/user").success(function(data) {
             self.user = data.userAuthentication.details.name;
+            self.id = data.userAuthentication.details.id;
             self.authenticated = true;
         }).error(function() {
             self.user = "N/A";

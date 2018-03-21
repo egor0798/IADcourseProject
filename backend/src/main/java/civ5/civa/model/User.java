@@ -19,16 +19,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+
     private String username;
 
-    private String password;
+    @Column(name = "facebook_id")
+    private String facebook;
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("User [id=").append(id).append(", username=").append(username).append(", password=").append(password).append("]");
-        return builder.toString();
+    public User(String username, String facebook_id){
+        this.username = username;
+        this.facebook = facebook_id;
     }
-
 }
