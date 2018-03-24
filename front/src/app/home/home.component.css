@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+#userplace{
+  display: table-cell;
+  height: auto;
+  padding-left: 20px ;
+  padding-right: 20px;
+  /*float: right;*/
+  width: 20%;
+  border-left: darkgray solid 2px ;
+}
+
+#userplace span{
+  padding-right: 10px ;
+  font-size: 20px;
+}
+
+
+#title{
+  width: 80%;
+  padding: 10px;
+  display: table-cell;
+  font-size: 5vh;
+  font-family: "DejaVu Serif";
+}
+
+#header{
+  width: 100%;
+  display: table;
+  clear: both;
+  background-color: cornflowerblue;
+  border-bottom: black solid 2px;
+}

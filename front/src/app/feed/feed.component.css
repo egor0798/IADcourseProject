@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+img {
+  border-radius: 5px;
+}
+
+tr {
+  padding: 4px;
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: solid 1px #64636d;
+  border-width: 2px;
+  background-color: lightgray;
+}
+
+
+#user{
+  font-size: 14px;
+  text-align: center;
+}
+
+#time{
+  font-size: 12px;
+  text-align: center;
+  color: #373737;
+}
+
+#userpic{
+  /*display: block;*/
+  padding: 4px;
+  border: 2px solid cornflowerblue;
+}

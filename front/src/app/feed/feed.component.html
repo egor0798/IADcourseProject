@@ -1,0 +1,15 @@
+<div id="main">
+  <tr *ngFor="let post of posts">
+    <td id="userpic">
+      <img src={{post.user.img_url}} />
+      <p id="user"> {{post.user.username}} </p>
+      <p id="time"> {{post.time | date : 'dd/MM/yyyy hh:mm'}} </p>
+    </td>
+
+    <td id="message">
+      <b>
+        {{post.message}}
+      </b>
+    </td>
+  </tr>
+</div>

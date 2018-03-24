@@ -1,6 +1,7 @@
 package civ5.civa.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
 
 
@@ -24,9 +26,11 @@ public class User {
 
     @Column(name = "facebook_id")
     private String facebook;
+    private String token;
 
-    public User(String username, String facebook_id){
+    public User(String username, String facebook_id, String tk){
         this.username = username;
         this.facebook = facebook_id;
+        this.token = tk;
     }
 }
