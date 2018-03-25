@@ -11,6 +11,7 @@ import { WondersComponent } from './wonders/wonders.component';
 import { NationsComponent } from './nations/nations.component';
 import { RanksComponent } from './ranks/ranks.component';
 import { FeedComponent } from './feed/feed.component';
+import {MainService} from "./main.service";
 
 const childRoutes: Routes = [
   {
@@ -58,7 +59,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

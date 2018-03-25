@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +25,6 @@ public class Nation {
     private String ruler;
 
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unique_building")
     private Building uniqueBuilding;
@@ -39,6 +39,7 @@ public class Nation {
     private PerkForState perk;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nation")
+    @JsonIgnore
     private List<Mod> modList = new ArrayList<>();
 
 

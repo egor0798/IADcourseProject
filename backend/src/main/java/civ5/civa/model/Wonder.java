@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class Wonder {
     private String properties;
 
     @ManyToMany(mappedBy = "wonderList")
+    @JsonIgnore
     private List<Technology> techList = new ArrayList<>();
 
     public Wonder(int id, String name, int pr_pr, int cul_pts, String prop){

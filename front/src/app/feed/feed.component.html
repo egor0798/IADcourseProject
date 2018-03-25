@@ -1,5 +1,6 @@
 <div id="main">
   <tr *ngFor="let post of posts">
+    <div id="row">
     <td id="userpic">
       <img src={{post.user.img_url}} />
       <p id="user"> {{post.user.username}} </p>
@@ -11,5 +12,6 @@
         {{post.message}}
       </b>
     </td>
+    </div>
   </tr>
 </div>

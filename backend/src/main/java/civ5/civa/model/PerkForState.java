@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class PerkForState {
     private String bonus;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perk")
+    @JsonIgnore
     private List<Nation> nationList;
 
 

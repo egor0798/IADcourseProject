@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,15 +24,19 @@ public class Resource {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bonus_without_improvement")
+    @JsonIgnore
     private BonusFromResource bonusWithoutImprovement;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bonus_with_improvement")
+    @JsonIgnore
     private BonusFromResource bonusWithImprovement;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_of_improvement")
+    @JsonIgnore
     private ImprovementBuildings typeOfImprovement;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
+    @JsonIgnore
     private List<Unit> unitList = new ArrayList<>();
 
 

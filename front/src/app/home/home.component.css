@@ -12,22 +12,40 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
 
 #userplace{
   display: table-cell;
-  height: auto;
-  padding-left: 20px ;
-  padding-right: 20px;
-  /*float: right;*/
-  width: 20%;
+  padding-left: 10px ;
   border-left: darkgray solid 2px ;
+  background-color: #bf7a93;
 }
 
-#userplace span{
+#logged_user{
+  display: block;
   padding-right: 10px ;
-  font-size: 20px;
+  font-size: 2.7vh;
+  float: top;
+}
+
+#logged_user a{
+  border: #d3abf5 solid 1px;
+  background-color: #6482a6;
+  position: relative;
+  top: -10px;
+  padding: 3px;
+  /*border-radius: 15%;*/
+}
+
+#logged_user img{
+  border-radius: 50%;
+  border: #d3abf5 solid 1px;
+
+}
+
+.crutch{
+  display: none;
 }
 
 
 #title{
-  width: 80%;
+  width: 85%;
   padding: 10px;
   display: table-cell;
   font-size: 5vh;
@@ -38,6 +56,70 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
   width: 100%;
   display: table;
   clear: both;
-  background-color: cornflowerblue;
-  border-bottom: black solid 2px;
+  background-color: #6482a6;
+  border-bottom: #DA727E solid 2px;
+}
+
+#wraper{
+  clear: both;
+}
+
+#sidebar{
+  float: left;
+  clear: both;
+  width: 15%;
+  background-color: #FFBC67;
+  margin-right: 10px;
+  padding: 20px 20px 10px 10px;
+  border-right: #DA727E solid 3px;
+  border-bottom: #DA727E solid 3px;
+}
+
+
+.category-wrap h3 {
+  font-size: 16px;
+  color: rgba(0,0,0,.6);
+  padding: 0 5px;
+  position: relative;
+}
+.category-wrap h3:after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #AC6C82;
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+  box-shadow: -8px -8px #AC6C82, 0 -8px #AC6C82, -8px 0 #AC6C82;
+}
+.category-wrap ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(0,0,0,.3);
+}
+.category-wrap li {margin: 12px 0 0 0px;}
+
+.category-wrap a {
+  text-decoration: none;
+  display: block;
+  font-size: 13px;
+  color: rgba(0,0,0,.6);
+  padding: 5px;
+  position: relative;
+  transition: .3s linear;
+}
+.category-wrap a:after {
+  font-family: FontAwesome;
+  position: absolute;
+  right: 5px;
+  color: white;
+  transition: .2s linear;
+}
+.category-wrap a:hover {
+  background: #AC6C82;
+  color: white;
+}
+.active{
+  background-color:  #AC6C82;;
 }

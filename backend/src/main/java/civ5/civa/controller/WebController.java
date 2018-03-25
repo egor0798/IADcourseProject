@@ -17,8 +17,14 @@ public class WebController{
 //TODO add field token_expires, check it and  rewrite user in db
     @GetMapping(value = "/save", params = {"username", "id", "token"})
     public void saveUser(@RequestParam("username") String username, @RequestParam("id") String id, @RequestParam("token") String token){
-        if(userRepository.findByFacebook(id) == null)
-            userRepository.save(new User(username, id, token));
+        System.out.println("SAVE USER");
+        //TODO think about adding expires_in field for user token
+        if(userRepository.findByFacebook(id) != null) {
+            System.out.println("deleting user");
+            userRepository.delete(userRepository.findByFacebook(id).getId());
+        }
+        userRepository.save(new User(username, id, token));
+
     }
 
     @GetMapping("/hat")

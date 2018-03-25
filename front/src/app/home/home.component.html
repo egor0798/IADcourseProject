@@ -2,35 +2,46 @@
 <div id="header">
   <span id="title">Сайт по игре Civilization V</span>
   <div id="userplace">
-    <!--TODO в зависимости от того залогинен юзер или нет показывать определённой поле-->
-      <!--<div id="logout">-->
-        <!--<img id="smallpic" src={{user.img_url}}/>-->
-        <!--<span>{{user.username}}</span>-->
-      <!--</div>-->
-    <!--TODO *ngIf никак не хочет работать, спросить у влада-->
+    <button  class="crutch" (click)="increase()" #mda>Click</button>
+    <div id="logged_user" *ngIf="img_url != null">
+      <img [src]="img_url" id="smallpic">
+      <a>{{user.username}}</a>
+    </div>
       <div id="login">
-        <span>Login</span>
-        <div class="fb-login-button" data-max-rows="1" data-size="small" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+        <div class="fb-login-button" data-max-rows="1" data-size="small" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
       </div>
   </div>
 </div>
 
 <div id="wraper">
   <div id="sidebar">
+    <h3>Меню</h3>
+    <ul class="category-wrap">
+      <li routerLinkActive="active" >
+        <a routerLink="/home/feed">Главная</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/home/tech">Технологии</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/home/units">Юниты</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/home/nations">Нации</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/home/ranks">Ранги</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/home/wonders">Чудеса света</a>
+      </li>
+    </ul>
   </div>
 
 
-  <div>
-    <!--TODO указать чтобы тут рендерился дочерний компонент-->
+  <div id="child">
     <router-outlet></router-outlet>
   </div>
 
 </div>
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.12&appId=231347784105855&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>

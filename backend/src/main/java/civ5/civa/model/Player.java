@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,10 +21,12 @@ public class Player {
     //unidirectional one-to-many
     @OneToMany
     @JoinColumn(name="players_id", referencedColumnName = "id")
+    @JsonIgnore
     private Set<Achievement> achievementList = new HashSet<>();
 
     //not unidirectional one-to-many
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "creator")
+    @JsonIgnore
     private List<Mod> modList = new ArrayList<>();
 
     @Id
@@ -39,18 +42,12 @@ public class Player {
     private int rank;
     @Column(name="password")
     private String password;
-    @Column (name="role")
-    // TODO do roles
-    //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //private List<Role> role;
-    private String role;
 
-    public Player(int id, String nickname, String firstName, String lastName, String role, String password){
+    public Player(int id, String nickname, String firstName, String lastName, String password){
         this.id=id;
         this.firstName=firstName;
         this.lastName=lastName;
         this.nickname=nickname;
-        this.role=role;
         this.password = password;
     }
 }

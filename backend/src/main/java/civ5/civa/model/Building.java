@@ -1,5 +1,9 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,9 +38,11 @@ public class Building {
 
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueBuilding")
+    @JsonIgnore
     private Nation nation;
 
     @ManyToMany(mappedBy = "buildings")
+    @JsonIgnore
     private List<Technology> technologies = new ArrayList<>();
 
 

@@ -11,6 +11,7 @@ export class FeedComponent implements OnInit {
   posts: Post[] = [];
   constructor(private http: HttpClient) { }
   //TODO обновлять ленту, если в родительском компоненте юзер залогинился
+
   ngOnInit() {
     this.http.get('http://localhost:8080/user/getall').subscribe((data: User[]) => {
       data.forEach((user) => {
@@ -25,7 +26,7 @@ export class FeedComponent implements OnInit {
                 post.message = post.message.replace('#civ ', '');
                 post.message = post.message.replace('#civ\n', '');
                 this.posts.push(new Post(user, post.message, post.created_time));
-                debugger;
+               // debugger;
               }
             });
             this.posts.sort((b, a) => {

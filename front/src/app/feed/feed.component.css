@@ -13,16 +13,22 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li{
 img {
   border-radius: 5px;
 }
+tbody{
+  width: 100%;
+  display: block;
+}
 
 tr {
   padding: 4px;
   display: block;
   margin-bottom: 20px;
   margin-top: 20px;
-  border: solid 1px #64636d;
-  border-width: 2px;
-  background-color: lightgray;
+  border: solid 3px #daa095;
+  background-color: rgba(92, 181, 197, 0.34);
+  width: 80%;
+  margin-left: 18%;
 }
+
 
 
 #user{
@@ -39,5 +45,5 @@ tr {
 #userpic{
   /*display: block;*/
   padding: 4px;
-  border: 2px solid cornflowerblue;
+  border: 2px dashed #daa095;
 }

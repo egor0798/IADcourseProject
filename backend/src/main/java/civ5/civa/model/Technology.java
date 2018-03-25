@@ -1,4 +1,5 @@
 package civ5.civa.model;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +25,9 @@ public class Technology {
     private String features;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "technologyToCreate")
-    private List<Unit> unitListList = new ArrayList<>();
+    @JsonIgnore
+    private List<Unit> unitList = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(
@@ -34,6 +37,7 @@ public class Technology {
     )
     private List<Building> buildings = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "tech_wonder",

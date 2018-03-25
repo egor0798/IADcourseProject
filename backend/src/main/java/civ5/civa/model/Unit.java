@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,8 +20,9 @@ public class Unit {
     private long id;
     @Column(name = "unit_name")
     private String name;
+    @JsonIgnore
     @Column(name = "unique_unit")
-    private boolean unique_unit;
+    private boolean unqUnit;
     @Column(name = "type")
     private String type;
     @Column(name = "points_to_create")
@@ -33,12 +35,14 @@ public class Unit {
     private int range_attack;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "technology_to_create")
+    @JsonIgnore
     private Technology technologyToCreate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource")
     private Resource resource;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueUnit")
+    @JsonIgnore
     private Nation nation;
 
     @ManyToMany
@@ -50,12 +54,12 @@ public class Unit {
     private List<PerkForUnit> perkForUnitList = new ArrayList<>();
 
 
-    public Unit(int id, String name, boolean unq_unit, String type, int pts_create, int pts_mov, int strength, int range_attack, Technology tech_create, Resource resource){
+    public Unit(int id, String name, boolean unqUnit, String type, int pts_create, int pts_mov, int strength, int range_attack, Technology tech_create, Resource resource){
         this.id=id;
         this.name = name;
         this.points_of_mov = pts_mov;
         this.points_to_create = pts_create;
-        this.unique_unit = unq_unit;
+        this.unqUnit = unqUnit;
         this.type = type;
         this.strength=strength;
         this.range_attack = range_attack;

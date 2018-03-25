@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class PerkForUnit {
     private String bonus;
 
     @ManyToMany(mappedBy = "perkForUnitList")
+    @JsonIgnore
     private List<Unit> unitList = new ArrayList<>();
 
     public PerkForUnit(long id, String parameter, String bonus){

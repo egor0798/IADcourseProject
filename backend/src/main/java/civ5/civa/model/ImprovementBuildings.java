@@ -1,5 +1,6 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class ImprovementBuildings {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "typeOfImprovement")
+    @JsonIgnore
     private List<Resource> resourceList = new ArrayList<>();
 
     public ImprovementBuildings(long id, String name){
