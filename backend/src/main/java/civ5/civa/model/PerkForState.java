@@ -1,11 +1,13 @@
 package civ5.civa.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -13,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="perks_for_states")
-public class PerkForState {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class PerkForState implements Serializable{
     @Id
     @Column(name = "id")
     private long id;

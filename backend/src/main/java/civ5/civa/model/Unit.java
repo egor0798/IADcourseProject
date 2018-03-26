@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
@@ -13,7 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="units")
-public class Unit {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Unit implements Serializable{
 
     @Id
     @Column(name = "id")
@@ -39,6 +41,7 @@ public class Unit {
     private Technology technologyToCreate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource")
+    @JsonIgnore
     private Resource resource;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueUnit")
@@ -51,6 +54,7 @@ public class Unit {
             joinColumns = @JoinColumn(name = "unit_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "perk_id", referencedColumnName = "id")
     )
+    @JsonIgnore
     private List<PerkForUnit> perkForUnitList = new ArrayList<>();
 
 

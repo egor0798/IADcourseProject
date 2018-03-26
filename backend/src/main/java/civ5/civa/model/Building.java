@@ -1,9 +1,6 @@
 package civ5.civa.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="buildings")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Building {
     @Id
     @Column(name = "id")
@@ -37,9 +35,9 @@ public class Building {
     private String properties;
 
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueBuilding")
-    @JsonIgnore
-    private Nation nation;
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "uniqueBuilding")
+//    @JsonIgnore
+    private Long nation;
 
     @ManyToMany(mappedBy = "buildings")
     @JsonIgnore

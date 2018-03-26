@@ -1,6 +1,9 @@
 package civ5.civa.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="nations")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Nation {
     @Id
     @Column(name = "id")
@@ -27,15 +31,18 @@ public class Nation {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unique_building")
+    @JsonIgnore
     private Building uniqueBuilding;
 
     //TODO think about splitting unit an unique unit. with common table hard to do 2 unique units for nation
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unique_unit")
+    @JsonIgnore
     private Unit uniqueUnit;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "perk")
+    @JsonIgnore
     private PerkForState perk;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nation")
